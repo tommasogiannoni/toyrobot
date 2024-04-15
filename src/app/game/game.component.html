@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="title">Toy Robot Game</h1>
+    <div class="row mt-5 board">
+        <table class="board-class">
+            @for (row of board; track $index) {
+                <tr>
+                    @for (col of row; track $index) {
+                        <td class="cell">
+                            {{ col }}
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="row mt-5 command-console">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+                    </svg>
+                </span>
+                <input #command type="text" class="form-control" placeholder="Insert command ..."  aria-describedby="basic-addon1">
+            </div>
+            <div style="margin-left: 30px;">
+                <button type="button" class="btn btn-primary" (click)="submitCommand(command.value)">PLAY</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (alertVisible) {
+    <div class="mt-3 alert alert-info alert-class" role="alert">
+        {{alertMsg}}
+    </div>
+}
