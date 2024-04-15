@@ -31,6 +31,9 @@ export class GameComponent implements OnInit{
           //
           this.started = true;
           const values = input.split(" ")[1].split(",");
+          if(values.length < 3)
+              return;
+
           this.place(Number(values[0].trim()), Number(values[1].trim()), values[2].trim());
 
           break;
@@ -75,7 +78,7 @@ export class GameComponent implements OnInit{
       }
       // place the robot
       this.robot = {x: Number(x), y: Number(y), direction: direction};
-      this.board[this.robot.x][this.robot.y] = "*";
+      this.board[this.robot.x][this.robot.y] = "&#129302;";
     }
 
     /**

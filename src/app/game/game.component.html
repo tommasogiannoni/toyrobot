@@ -6,13 +6,19 @@
                 <tr>
                     @for (col of row; track $index) {
                         <td class="cell">
-                            {{ col }}
+                            <div [innerHTML]="col">
+                            </div>
                         </td>
                     }
                 </tr>
             }
         </table>
     </div>
+    @if (robot.direction != "") {
+        <div class="row mt-3">
+            <h6>Robot direction: {{robot.direction}}</h6>
+        </div>
+    }
     <div class="row mt-5 command-console">
         <div class="form-group">
             <div class="input-group">
