@@ -1,3 +1,8 @@
+/**
+ * parse the keywords of the commad. return INVALID command if not recognized.
+ * @param rawCommand 
+ * @returns 
+ */
 export function commandParser(rawCommand: string) {
     rawCommand.trim();
     const command = rawCommand.split(" ")[0].toUpperCase();
@@ -13,6 +18,11 @@ export function commandParser(rawCommand: string) {
     return "INVALID"
 }
 
+/**
+ * Parse the second part of the place command. return invalid commad if not parsed
+ * @param rawPlace 
+ * @returns 
+ */
 export function commandExtractPlace(rawPlace: string) {
     const values = rawPlace.split(" ")[1].split(",");
 

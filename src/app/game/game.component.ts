@@ -33,14 +33,11 @@ export class GameComponent implements OnInit{
             this.board[this.robot.x][this.robot.y] = "0";
           //
           const [x, y, dir] = commandExtractPlace(input);
-          //const values = input.split(" ")[1].split(",");
           
           if( dir == "INVALID" ) {
-            this.alertMsg = ALERT_MSG.invalid_input;
-            this.showAlert();
+            this.showAlert(ALERT_MSG.invalid_input);
             return;
           }
-          
           
           this.started = true; // start the game
           this.place(Number(x), Number(y), String(dir));
@@ -48,8 +45,7 @@ export class GameComponent implements OnInit{
           break;
         case COMMAND.LEFT:
           if(!this.started) {
-            this.alertMsg =  ALERT_MSG.not_started;
-            this.showAlert();
+            this.showAlert(ALERT_MSG.not_started);
             return;
           }
           //
@@ -57,8 +53,7 @@ export class GameComponent implements OnInit{
           break;
         case COMMAND.RIGHT:
           if(!this.started) {
-            this.alertMsg =  ALERT_MSG.not_started;
-            this.showAlert();
+            this.showAlert(ALERT_MSG.not_started);
             return;
           }
           //
@@ -66,8 +61,7 @@ export class GameComponent implements OnInit{
           break;
         case COMMAND.MOVE:
           if(!this.started) {
-            this.alertMsg = ALERT_MSG.not_started;
-            this.showAlert();
+            this.showAlert(ALERT_MSG.not_started);
             return;
           }
           //
@@ -75,22 +69,21 @@ export class GameComponent implements OnInit{
           break;
         case COMMAND.REPORT:
           if(!this.started) {
-            this.alertMsg =  ALERT_MSG.not_started;
-            this.showAlert();
+            this.showAlert(ALERT_MSG.not_started);
             return;
           }
+          //
+          this.report();
           break;
         case COMMAND.INVALID: 
-          this.alertMsg = ALERT_MSG.invalid_input;
-          this.showAlert();
+          this.showAlert(ALERT_MSG.invalid_input);
           break;
       }
     }
 
     place(x: number, y: number, direction: string) {
       if( !this.isValid(x, y) ) {
-        this.alertMsg = ALERT_MSG.out;
-        this.showAlert();
+        this.showAlert(ALERT_MSG.out);
         return false;
       }
 
@@ -152,7 +145,7 @@ export class GameComponent implements OnInit{
     }
 
     report() {
-
+      this.showAlert(`Position: ${this.robot.x},${this.robot.y} - ${this.robot.direction}`);
     }
 
     isValid(x: number, y: number) { 
@@ -161,7 +154,8 @@ export class GameComponent implements OnInit{
       return false;
     }
 
-    showAlert() {
+    showAlert(msg: string) {
+      this.alertMsg = msg;
       this.alertVisible = true;
       setTimeout(() => {
         this.alertVisible = false;
