@@ -37,7 +37,7 @@ export class GameComponent implements OnInit{
           
           // if the new commad is invalid maintain old position.
           if( x==-1 || y==-1 || dir == COMMAND.INVALID ) {
-            this.place(this.robot.x,this.robot.y, old_direction);
+            this.place(this.robot.x, this.robot.y, old_direction);
             this.showAlert(ALERT_MSG.invalid_input);
             return;
           }
