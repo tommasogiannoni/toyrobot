@@ -18,4 +18,4 @@ npm version: `8.19.3`
 
 Tommaso Giannoni 
 - [Site](https://www.tommasogiannoni.com)
-- [Linkedin](https://www.choosealicense.com/licenses/mit/](https://www.linkedin.com/in/tommasogiannoni)
+- [Linkedin](https://www.linkedin.com/in/tommasogiannoni)
