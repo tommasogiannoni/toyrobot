@@ -99,7 +99,7 @@ export class GameComponent implements OnInit{
     }
 
     /**
-     * NORTH, SOUTH, EAST or WEST
+     * move the robot one unit to NORTH, SOUTH, EAST or WEST
      */
     move() {
       let placed = true;
