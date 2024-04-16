@@ -32,16 +32,18 @@ export class GameComponent implements OnInit{
           if(this.robot.x != -1 && this.robot.y != -1) 
             this.board[this.robot.x][this.robot.y] = "0";
           //
+          const old_direction = this.robot.direction;
           const [x, y, dir] = commandExtractPlace(input);
           
-          if( dir == "INVALID" ) {
+          // if the new commad is invalid maintain old position.
+          if( x==-1 || y==-1 || dir == "INVALID" ) {
+            this.place(this.robot.x,this.robot.y, old_direction);
             this.showAlert(ALERT_MSG.invalid_input);
             return;
           }
           
           this.started = true; // start the game
           this.place(Number(x), Number(y), String(dir));
-
           break;
         case COMMAND.LEFT:
           if(!this.started) {
@@ -134,7 +136,6 @@ export class GameComponent implements OnInit{
     }
 
     right() {
-      console.log(this.robot.direction);
       const direction = this.robot.direction;
 
       // change by 90 degree to the right;
