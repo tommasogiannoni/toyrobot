@@ -14,7 +14,7 @@ export enum COMMAND {
 }
 
 export enum ALERT_MSG {
-    not_started = "You need to place robot before.",
+    not_started = "You need to place the robot before.",
     invalid_input = "Input not valid!",
     out = "This command place robot out of the table! Retry"
 }
