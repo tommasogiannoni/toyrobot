@@ -43,7 +43,7 @@ export class GameComponent implements OnInit{
           }
           
           this.started = true; // start the game
-          this.place(Number(x), Number(y), String(dir));
+          this.place(this.convertRow( Number(x) ), Number(y), String(dir));
           break;
         case COMMAND.LEFT:
           if(!this.started) {
@@ -96,6 +96,15 @@ export class GameComponent implements OnInit{
       // place the robot
       this.board[this.robot.x][this.robot.y] = "&#129302;";
       return true;
+    }
+
+    /**
+     * used to invert x,y axis index in the matrix
+     * @param x 
+     * @returns 
+     */
+    convertRow(x: number) {
+      return this.board.length-1 - x;
     }
 
     /**
