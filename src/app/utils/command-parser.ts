@@ -9,9 +9,9 @@ export function commandParser(rawCommand: string) {
     rawCommand.trim();
     const command = rawCommand.split(" ")[0].toUpperCase();
 
-    if( command == "MOVE" || command == "LEFT" || command == "RIGHT" || command == "REPORT")
+    if( command == COMMAND.MOVE || command == COMMAND.LEFT || command == COMMAND.RIGHT || command == COMMAND.REPORT)
             return command;
-    else if(command == "PLACE") {
+    else if(command == COMMAND.PLACE) {
         if(!rawCommand.split(" ")[1]) 
             return COMMAND.INVALID;
         return command;
