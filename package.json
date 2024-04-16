@@ -1,6 +1,7 @@
 {
   "name": "toy-robot-app",
   "version": "1.0.0",
+  "author": "Tommaso Giannoni",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
