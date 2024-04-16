@@ -1,4 +1,4 @@
-import { directions } from "../model/game-models";
+import { COMMAND, directions } from "../model/game-models";
 
 /**
  * parse the keywords of the commad. return INVALID command if not recognized.
@@ -13,11 +13,11 @@ export function commandParser(rawCommand: string) {
             return command;
     else if(command == "PLACE") {
         if(!rawCommand.split(" ")[1]) 
-            return "INVALID";
+            return COMMAND.INVALID;
         return command;
     }
     
-    return "INVALID"
+    return COMMAND.INVALID;
 }
 
 /**
@@ -30,20 +30,20 @@ export function commandExtractPlace(rawPlace: string) {
 
     // not typed command param
     if(values.length < 3)
-        return [-1, -1, "INVALID"];
+        return [-1, -1, COMMAND.INVALID];
 
     // empty command param
     if(values.find(elem => elem == "" || elem == " ") != undefined)
-        return [-1, -1, "INVALID"];
+        return [-1, -1, COMMAND.INVALID];
 
     // typed char as x or y value
     if( isNaN(Number(values[0])) || isNaN(Number(values[1])) )
-        return [-1, -1, "INVALID"];
+        return [-1, -1, COMMAND.INVALID];
 
     // typed invalid direction
     if(values[2].toUpperCase() != directions[0] && values[2].toUpperCase() != directions[1] 
         && values[2].toUpperCase() != directions[2] && values[2].toUpperCase() != directions[3])
-            return [-1, -1, "INVALID"];
+            return [-1, -1, COMMAND.INVALID];
 
     return [Number(values[0].trim()), Number(values[1].trim()), values[2].trim()];
 }

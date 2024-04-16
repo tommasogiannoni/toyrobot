@@ -36,7 +36,7 @@ export class GameComponent implements OnInit{
           const [x, y, dir] = commandExtractPlace(input);
           
           // if the new commad is invalid maintain old position.
-          if( x==-1 || y==-1 || dir == "INVALID" ) {
+          if( x==-1 || y==-1 || dir == COMMAND.INVALID ) {
             this.place(this.robot.x,this.robot.y, old_direction);
             this.showAlert(ALERT_MSG.invalid_input);
             return;
