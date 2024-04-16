@@ -1,3 +1,5 @@
+import { directions } from "../model/game-models";
+
 /**
  * parse the keywords of the commad. return INVALID command if not recognized.
  * @param rawCommand 
@@ -33,6 +35,10 @@ export function commandExtractPlace(rawPlace: string) {
         if(val == "" || val == " ")
             return [-1, -1, "INVALID"];
     }
+
+    if(values[2].toUpperCase() != directions[0] && values[2].toUpperCase() != directions[1] 
+        && values[2].toUpperCase() != directions[2] && values[2].toUpperCase() != directions[3])
+            return [-1, -1, "INVALID"];
 
     return [values[0].trim(), values[1].trim(), values[2].trim()];
 }
