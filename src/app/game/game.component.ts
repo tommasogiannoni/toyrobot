@@ -99,7 +99,7 @@ export class GameComponent implements OnInit{
     }
 
     /**
-     * used to invert x,y axis index in the matrix
+     * used to invert x axis index in the matrix the first time
      * @param x 
      * @returns 
      */
