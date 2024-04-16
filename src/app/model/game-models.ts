@@ -10,8 +10,14 @@ export enum COMMAND {
     LEFT= "LEFT",
     RIGHT= "RIGHT",
     REPORT= "REPORT",
+    INVALID= "INVALID"
 }
 
 export enum ALERT_MSG {
-    not_started = "You need to place robot before."
+    not_started = "You need to place robot before.",
+    invalid_input = "Input non valido!",
+    out = "This command place robot out of the table! Retry"
 }
+
+//NORTH, SOUTH, EAST or WEST
+export const directions = ["EAST", "SOUTH", "WEST", "NORTH"];

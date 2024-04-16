@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ALERT_MSG, COMMAND, Robot } from '../model/game-models';
+import { ALERT_MSG, COMMAND, Robot, directions } from '../model/game-models';
+import { commandExtractPlace, commandParser } from '../utils/command-parser';
 
 @Component({
   selector: 'app-game',
@@ -23,18 +24,26 @@ export class GameComponent implements OnInit{
     }
 
     submitCommand(input: string) {
-      input.trim();
-      const commad = input.split(" ")[0];
+      const commad = commandParser(input);
 
       switch(commad) {
         case COMMAND.PLACE:
+          // if already placed reset
+          if(this.robot.x != -1 && this.robot.y != -1) 
+            this.board[this.robot.x][this.robot.y] = "0";
           //
-          this.started = true;
-          const values = input.split(" ")[1].split(",");
-          if(values.length < 3)
-              return;
-
-          this.place(Number(values[0].trim()), Number(values[1].trim()), values[2].trim());
+          const [x, y, dir] = commandExtractPlace(input);
+          //const values = input.split(" ")[1].split(",");
+          
+          if( dir == "INVALID" ) {
+            this.alertMsg = ALERT_MSG.invalid_input;
+            this.showAlert();
+            return;
+          }
+          
+          
+          this.started = true; // start the game
+          this.place(Number(x), Number(y), String(dir));
 
           break;
         case COMMAND.LEFT:
@@ -43,6 +52,8 @@ export class GameComponent implements OnInit{
             this.showAlert();
             return;
           }
+          //
+          this.left();
           break;
         case COMMAND.RIGHT:
           if(!this.started) {
@@ -50,6 +61,8 @@ export class GameComponent implements OnInit{
             this.showAlert();
             return;
           }
+          //
+          this.right();
           break;
         case COMMAND.MOVE:
           if(!this.started) {
@@ -57,7 +70,7 @@ export class GameComponent implements OnInit{
             this.showAlert();
             return;
           }
-
+          //
           this.move();
           break;
         case COMMAND.REPORT:
@@ -67,48 +80,75 @@ export class GameComponent implements OnInit{
             return;
           }
           break;
+        case COMMAND.INVALID: 
+          this.alertMsg = ALERT_MSG.invalid_input;
+          this.showAlert();
+          break;
       }
     }
 
     place(x: number, y: number, direction: string) {
-      if(!this.isValid(x, y)) {
-        this.alertMsg = "This command place robot out of the table! Retry";
+      if( !this.isValid(x, y) ) {
+        this.alertMsg = ALERT_MSG.out;
         this.showAlert();
-        return;
+        return false;
       }
+
+      // update the robot
+      this.robot.x = Number(x), 
+      this.robot.y = Number(y), 
+      this.robot.direction = direction.toUpperCase();
       // place the robot
-      this.robot = {x: Number(x), y: Number(y), direction: direction};
       this.board[this.robot.x][this.robot.y] = "&#129302;";
+      return true;
     }
 
     /**
      * NORTH, SOUTH, EAST or WEST
      */
     move() {
+      let placed = true;
       const direction = this.robot.direction;
+      this.board[this.robot.x][this.robot.y] = "0"; // reset current position
 
       switch(direction) {
         case "NORTH":
-          this.place(this.robot.x-1, this.robot.y, this.robot.direction);
+          placed = this.place(this.robot.x-1, this.robot.y, this.robot.direction);
           break;
         case "SOUTH":
-          this.place(this.robot.x+1, this.robot.y, this.robot.direction);
+          placed = this.place(this.robot.x+1, this.robot.y, this.robot.direction);
           break;
         case "EAST":
-          this.place(this.robot.x, this.robot.y+1, this.robot.direction);
+          placed = this.place(this.robot.x, this.robot.y+1, this.robot.direction);
           break;
         case "WEST":
-          this.place(this.robot.x, this.robot.y-1, this.robot.direction);
+          placed =this.place(this.robot.x, this.robot.y-1, this.robot.direction);
           break;
       }
+
+      if(!placed) // re-set previous position
+        this.place(this.robot.x, this.robot.y, this.robot.direction);
     }
 
     left() {
+      const direction = this.robot.direction;
 
+      // change by 90 degree to the left;
+      let position = directions.indexOf( direction );
+      position = (position - 1 + directions.length) % directions.length;
+
+      this.robot.direction = directions[position];
     }
 
     right() {
+      console.log(this.robot.direction);
+      const direction = this.robot.direction;
 
+      // change by 90 degree to the right;
+      let position = directions.indexOf( direction );
+      position = (position + 1 + directions.length) % directions.length;
+
+      this.robot.direction = directions[position];
     }
 
     report() {
@@ -116,16 +156,15 @@ export class GameComponent implements OnInit{
     }
 
     isValid(x: number, y: number) { 
-      if( x > this.board.length || x < 0 ||
-          y > this.board[0].length ||  y < 0)
-          return false;
-      return true;
+      if( x <= this.board.length-1 && x >= 0 && y <= this.board[x].length-1 && y >= 0 )
+        return true;
+      return false;
     }
 
     showAlert() {
       this.alertVisible = true;
       setTimeout(() => {
         this.alertVisible = false;
-      }, 2800); 
+      }, 3000); 
     }
 }
