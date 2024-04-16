@@ -8,7 +8,7 @@ Version: [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
 Install angular: `npm install -g @angular/cli`
 
 - node version: `v18.13.0`
-= npm version: `8.19.3`
+- npm version: `8.19.3`
 
 ## Run Application
 
