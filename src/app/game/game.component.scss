@@ -60,10 +60,15 @@
 }
 
 .form-control {
-    color: #00000d;
+    color: #fcfcfc;
+    background-color: #1b1d34;
+}
+.form-control::placeholder { 
+    color: #cdbbab51;
+    opacity: 6; 
 }
 .form-control:focus {
-    border-color: #f6c65e;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #f6c65e;
+    border-color: #66aa5d;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #66aa5d;
 }
 
