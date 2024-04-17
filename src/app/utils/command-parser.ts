@@ -1,5 +1,5 @@
 import { COMMAND, directions } from "../model/game-models";
-
+const [MAX, MIN] = [4,0];
 /**
  * parse the keywords of the commad. return INVALID command if not recognized.
  * @param rawCommand 
@@ -38,6 +38,9 @@ export function commandExtractPlace(rawPlace: string) {
 
     // typed char as x or y value
     if( isNaN(Number(values[0])) || isNaN(Number(values[1])) )
+        return [-1, -1, COMMAND.INVALID];
+
+    if( Number(values[0]) > MAX || Number(values[1]) > MAX || Number(values[0]) < MIN || Number(values[1]) < MIN)
         return [-1, -1, COMMAND.INVALID];
 
     // typed invalid direction
