@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ALERT_MSG, COMMAND, Robot, directions } from '../model/game-models';
+import { ALERT_MSG, Alien, COMMAND, Robot, directions } from '../model/game-models';
 import { commandExtractPlace, commandParser } from '../utils/command-parser';
 
 @Component({
@@ -13,14 +13,21 @@ export class GameComponent implements OnInit{
     board!: any;
     started: boolean = false;
     robot!: Robot;
+    aliens!: Array<Alien>;
     alertMsg!: string;
     alertVisible: boolean = false;
+    winAlertMsg!: string;
+    winDesc!: string;
+    winAlertVisible: boolean = false;
+    points!: number;
 
     constructor() { }
 
     ngOnInit(): void {
         this.board = Array.from({ length: 5 }, () => Array.from({ length: 5 }).fill(0));;
         this.robot = {x: -1, y: -1, direction: ""};
+        this.aliens = [];
+        this.points = 0;
     }
 
     submitCommand(input: string) {
@@ -44,6 +51,10 @@ export class GameComponent implements OnInit{
           
           this.started = true; // start the game
           this.place(this.convertRow( Number(x) ), Number(y), String(dir));
+
+          // place aliens
+          this.placeAllAliens();
+
           break;
         case COMMAND.LEFT:
           if(!this.started) {
@@ -89,12 +100,56 @@ export class GameComponent implements OnInit{
         return false;
       }
 
+      if(this.board[x][y] == "&#128125;") { // alien encountered
+        this.points += 1;
+        const idx_of_aliens_to_remove = this.aliens.findIndex( elem => (elem.x == x && elem.y == y));
+        this.aliens.splice(idx_of_aliens_to_remove, 1);
+
+        if(this.aliens.length == 0) {
+          this.showWinAlert();
+        }
+      }
+
       // update the robot
       this.robot.x = Number(x), 
       this.robot.y = Number(y), 
       this.robot.direction = direction.toUpperCase();
       // place the robot
       this.board[this.robot.x][this.robot.y] = "&#129302;";
+      return true;
+    }
+
+    placeAllAliens() {
+      const exclude_x = this.robot.x;
+      const exclude_y = this.robot.y;
+      const number_of_aliens = Math.floor(Math.random() * 4) + 1; 
+          
+      for (let i = 0; i < number_of_aliens; i++) {
+        let x = -1;
+        let y = -1;
+      
+        while (x === -1 || x === exclude_x) {
+          x = Math.floor(Math.random() * 5);
+        }
+      
+        while (y === -1 || y === exclude_y) {
+          y = Math.floor(Math.random() * 5); 
+        }
+      
+        this.aliens.push({ x: x, y: y });
+        this.placeAlien(this.convertRow(Number(this.aliens[i].x)), Number(this.aliens[i].y));
+      }
+    }
+
+    placeAlien(x: number, y: number) {
+      console.log(x,y);
+      if( !this.isValid(x, y) ) {
+        this.showAlert(ALERT_MSG.out);
+        return false;
+      }
+
+      // place the alien
+      this.board[x][y] = "&#128125;";
       return true;
     }
 
@@ -170,5 +225,13 @@ export class GameComponent implements OnInit{
       setTimeout(() => {
         this.alertVisible = false;
       }, 3000); 
+    }
+    showWinAlert() {
+      this.winAlertVisible = true;
+      this.winAlertMsg = ALERT_MSG.win;
+      this.winDesc = ALERT_MSG.win_desc;
+      setTimeout(() => {
+        this.winAlertVisible = false;
+      }, 5000); 
     }
 }
