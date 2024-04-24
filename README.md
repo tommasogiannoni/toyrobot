@@ -1,7 +1,10 @@
-# ToyRobotApp
+# Toy Robot Simulator
 <br/>
 <img src="https://github.com/tommasogiannoni/toy-robot-app/blob/master/src/assets/img/example-image.png"></h2>
 <br/>
+
+Small toy robot game where you can move a robot inside a 5x5 matrix with interactive feedback and an 
+with arcade game graphics.
 
 ## Prerequisites
 Version: [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
@@ -17,7 +20,9 @@ Install angular: `npm install -g @angular/cli`
 - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Authors
+Tommaso Giannoni
 
-Tommaso Giannoni 
-- [Site](https://www.tommasogiannoni.com)
+> I designed all the applications, from architecture to design of the graphics.
+> I developed the entire code of the application.
+- [My Site](https://www.tommasogiannoni.com)
 - [Linkedin](https://www.linkedin.com/in/tommasogiannoni)
