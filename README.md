@@ -39,7 +39,5 @@ Install angular: `npm install -g @angular/cli`
 ## Authors
 Tommaso Giannoni
 
-> I designed all the applications, from architecture to design of the graphics.
-> I developed the entire code of the application.
 - [My Site](https://www.tommasogiannoni.com)
 - [Linkedin](https://www.linkedin.com/in/tommasogiannoni)
