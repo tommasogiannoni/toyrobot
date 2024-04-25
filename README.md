@@ -1,6 +1,6 @@
 # Toy Robot Simulator
 <br/>
-<img src="https://github.com/tommasogiannoni/toy-robot-app/blob/master/src/assets/img/example-image.png"></h2>
+<img src="https://github.com/tommasogiannoni/toy-robot-app/blob/master/src/assets/img/example-image-1.png"></h2>
 <br/>
 
 Small toy robot game where you can move a robot inside a 5x5 matrix with interactive feedback and arcade-style graphics. 
