@@ -22,7 +22,7 @@ export enum ALERT_MSG {
     invalid_input = "Input not valid!",
     out = "This command place robot out of the table! Retry",
     win = "Defeated all the aliens!",
-    win_desc = "Use the command 'PLACE'  to restart the game."
+    win_desc = "Use the command 'PLACE'  to generate new aliens."
 }
 
 //NORTH, SOUTH, EAST or WEST

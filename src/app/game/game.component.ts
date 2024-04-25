@@ -142,7 +142,6 @@ export class GameComponent implements OnInit{
     }
 
     placeAlien(x: number, y: number) {
-      console.log(x,y);
       if( !this.isValid(x, y) ) {
         this.showAlert(ALERT_MSG.out);
         return false;
