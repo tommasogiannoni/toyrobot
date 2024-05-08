@@ -1,4 +1,4 @@
-# Toy Robot Simulator
+# 🤖 Toy Robot Simulator
 <br/>
 <img src="https://github.com/tommasogiannoni/toy-robot-app/blob/master/src/assets/img/example-image-1.png"></h2>
 <br/>
