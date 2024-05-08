@@ -3,6 +3,10 @@
 <img src="https://github.com/tommasogiannoni/toy-robot-app/blob/master/src/assets/img/example-image-1.png"></h2>
 <br/>
 
+![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen)
+![JavaScript](https://img.shields.io/badge/Language-typescript-blue)
+![React](https://img.shields.io/badge/Angular-17.3.0-red)
+
 Small toy robot game where you can move a robot inside a 5x5 matrix with interactive feedback and arcade-style graphics. 
 The goal is to defeat as many aliens as you can. Each alien defeated scores 1 point.
 
